@@ -1,0 +1,49 @@
+name: ypower
+options:
+  bundleIdPrefix: com.dongeui
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+    ENABLE_HARDENED_RUNTIME: YES
+    CODE_SIGN_STYLE: Automatic
+targets:
+  ypower:
+    type: application
+    platform: macOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: ypower
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.dongeui.ypower
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: ypower/Info.plist
+        CODE_SIGN_ENTITLEMENTS: ypower/ypower.entitlements
+        ASSETCATALOG_COMPILER_APPICON_NAME: ""
+  ypowerTests:
+    type: bundle.unit-test
+    platform: macOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: ypowerTests
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.dongeui.ypowerTests
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: ypower
+schemes:
+  ypower:
+    build:
+      targets:
+        ypower: all
+        ypowerTests: [test]
+    test:
+      targets:
+        - ypowerTests
+    run:
+      config: Debug

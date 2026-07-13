@@ -1,0 +1,513 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		090E5FFACCBDA8AEE8CB14F6 /* WiFiMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A318C85304F5D3B45207C2D /* WiFiMonitor.swift */; };
+		12495856FE8393B45E4A0468 /* NetworkQualityEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B29BF4157DC3FC0D3A32B06 /* NetworkQualityEvaluatorTests.swift */; };
+		423C32103F8FB23BEAAB8B1C /* ShellRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29BAAFF665FFA2D81D51E75 /* ShellRunner.swift */; };
+		5712D5B81B2A19BD86F58535 /* EthernetMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2F409961A201887753ADBC /* EthernetMonitor.swift */; };
+		5A9692B0285B6B3F4552E6D7 /* NetworkQualityEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496A89EA0186B4B1075C1529 /* NetworkQualityEvaluator.swift */; };
+		5CC3A64F3CD0EC737E145032 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CD95166282D46F607E1573 /* AppDelegate.swift */; };
+		5E9FE45E34907D4E53C3EA0F /* MenuContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE12AE6C5A76761CE750D182 /* MenuContentView.swift */; };
+		660135913A3CC5D96F872EB7 /* ypowerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7206FBFCB1EB3295639DF6E /* ypowerApp.swift */; };
+		6ACC853C561E8190A1C82EFB /* NetworkCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B9D35C9D91C4EAB8CA4807 /* NetworkCandidate.swift */; };
+		83F396600CE193EB6A86C1FA /* KnownNetworkResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379BB4659C1D8C0A9263408 /* KnownNetworkResolver.swift */; };
+		89A6926B244437EA19A8FBE4 /* ConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE063EB5059BEE9FE4DF61C0 /* ConnectionState.swift */; };
+		A60FBE11B6736FA0C10CBD72 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED3A93CBF9773AB05D22E2 /* NotificationManager.swift */; };
+		ACD7E94E2B5A891FC54B2BFF /* MenuBarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C789AC4E5C1A605A93FD1EF /* MenuBarLabel.swift */; };
+		AF256A84B9EA0637FDB9EC2D /* LocationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AC19896104A88554675F55 /* LocationPermissionManager.swift */; };
+		C0DE777106A8D392DB780A45 /* MenuBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29ABBBB720F30478394B0B53 /* MenuBarViewModel.swift */; };
+		C3A3A70DAC05C41442C03C9B /* CandidateRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01F72B4BD99A23FC5602DBF /* CandidateRow.swift */; };
+		C401EE0DE8642654D6B36640 /* PasswordPromptSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330BF44093B25613572D5FEB /* PasswordPromptSheet.swift */; };
+		C961383FCD543175A31C3136 /* PrimaryInterfaceResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1339473FC292286250427D28 /* PrimaryInterfaceResolver.swift */; };
+		E01C0C96189A2A9ACE07E686 /* SwitchExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC3FFDC78B1F956ACA008B /* SwitchExecutor.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6661E6F5A84F9CB333387A2E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04F8BBAF27888FE17F78B1D0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B8B60A8E2627CD4F9387F92E;
+			remoteInfo = ypower;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		127C39173B7F2D8A24A78B16 /* ypower.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ypower.entitlements; sourceTree = "<group>"; };
+		1339473FC292286250427D28 /* PrimaryInterfaceResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryInterfaceResolver.swift; sourceTree = "<group>"; };
+		1DB9FC2007CBCB526C2C5607 /* ypowerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ypowerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		28B9D35C9D91C4EAB8CA4807 /* NetworkCandidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCandidate.swift; sourceTree = "<group>"; };
+		29ABBBB720F30478394B0B53 /* MenuBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarViewModel.swift; sourceTree = "<group>"; };
+		2ECC3FFDC78B1F956ACA008B /* SwitchExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchExecutor.swift; sourceTree = "<group>"; };
+		330BF44093B25613572D5FEB /* PasswordPromptSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordPromptSheet.swift; sourceTree = "<group>"; };
+		36CD95166282D46F607E1573 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		496A89EA0186B4B1075C1529 /* NetworkQualityEvaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkQualityEvaluator.swift; sourceTree = "<group>"; };
+		5C789AC4E5C1A605A93FD1EF /* MenuBarLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarLabel.swift; sourceTree = "<group>"; };
+		6058D000F87BFA1187438ABB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6379BB4659C1D8C0A9263408 /* KnownNetworkResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownNetworkResolver.swift; sourceTree = "<group>"; };
+		7A318C85304F5D3B45207C2D /* WiFiMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiMonitor.swift; sourceTree = "<group>"; };
+		7D26B30F0C32165EE9BE1519 /* ypower.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ypower.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F2F409961A201887753ADBC /* EthernetMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthernetMonitor.swift; sourceTree = "<group>"; };
+		9B29BF4157DC3FC0D3A32B06 /* NetworkQualityEvaluatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkQualityEvaluatorTests.swift; sourceTree = "<group>"; };
+		A29BAAFF665FFA2D81D51E75 /* ShellRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellRunner.swift; sourceTree = "<group>"; };
+		B01F72B4BD99A23FC5602DBF /* CandidateRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateRow.swift; sourceTree = "<group>"; };
+		B7206FBFCB1EB3295639DF6E /* ypowerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ypowerApp.swift; sourceTree = "<group>"; };
+		C0ED3A93CBF9773AB05D22E2 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		CE063EB5059BEE9FE4DF61C0 /* ConnectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionState.swift; sourceTree = "<group>"; };
+		DE12AE6C5A76761CE750D182 /* MenuContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuContentView.swift; sourceTree = "<group>"; };
+		E5AC19896104A88554675F55 /* LocationPermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		20C2D6B3ABFCFA6EBCBF35EE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE063EB5059BEE9FE4DF61C0 /* ConnectionState.swift */,
+				28B9D35C9D91C4EAB8CA4807 /* NetworkCandidate.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		234AE1F6990A36DB466B2FA0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B01F72B4BD99A23FC5602DBF /* CandidateRow.swift */,
+				5C789AC4E5C1A605A93FD1EF /* MenuBarLabel.swift */,
+				DE12AE6C5A76761CE750D182 /* MenuContentView.swift */,
+				330BF44093B25613572D5FEB /* PasswordPromptSheet.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3538815AAC2AE3CAD7D4CF0F /* ypower */ = {
+			isa = PBXGroup;
+			children = (
+				36CD95166282D46F607E1573 /* AppDelegate.swift */,
+				6058D000F87BFA1187438ABB /* Info.plist */,
+				127C39173B7F2D8A24A78B16 /* ypower.entitlements */,
+				B7206FBFCB1EB3295639DF6E /* ypowerApp.swift */,
+				7606C9178246B8E967A38496 /* Core */,
+				20C2D6B3ABFCFA6EBCBF35EE /* Models */,
+				8F1378840B64DB21A8850446 /* Support */,
+				DB1EE11A0C3E62D1A4E92F7C /* ViewModels */,
+				234AE1F6990A36DB466B2FA0 /* Views */,
+			);
+			path = ypower;
+			sourceTree = "<group>";
+		};
+		7606C9178246B8E967A38496 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				7F2F409961A201887753ADBC /* EthernetMonitor.swift */,
+				6379BB4659C1D8C0A9263408 /* KnownNetworkResolver.swift */,
+				E5AC19896104A88554675F55 /* LocationPermissionManager.swift */,
+				496A89EA0186B4B1075C1529 /* NetworkQualityEvaluator.swift */,
+				C0ED3A93CBF9773AB05D22E2 /* NotificationManager.swift */,
+				1339473FC292286250427D28 /* PrimaryInterfaceResolver.swift */,
+				2ECC3FFDC78B1F956ACA008B /* SwitchExecutor.swift */,
+				7A318C85304F5D3B45207C2D /* WiFiMonitor.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		8F1378840B64DB21A8850446 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				A29BAAFF665FFA2D81D51E75 /* ShellRunner.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		96E008928A1D5F22FDB428BC = {
+			isa = PBXGroup;
+			children = (
+				3538815AAC2AE3CAD7D4CF0F /* ypower */,
+				FD70F4D0779CE7BCCD207CA8 /* ypowerTests */,
+				E715B70C0CECEBFE905817FF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DB1EE11A0C3E62D1A4E92F7C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				29ABBBB720F30478394B0B53 /* MenuBarViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E715B70C0CECEBFE905817FF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7D26B30F0C32165EE9BE1519 /* ypower.app */,
+				1DB9FC2007CBCB526C2C5607 /* ypowerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FD70F4D0779CE7BCCD207CA8 /* ypowerTests */ = {
+			isa = PBXGroup;
+			children = (
+				9B29BF4157DC3FC0D3A32B06 /* NetworkQualityEvaluatorTests.swift */,
+			);
+			path = ypowerTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B8B60A8E2627CD4F9387F92E /* ypower */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD265BD68C74FFD5AFEB4DE7 /* Build configuration list for PBXNativeTarget "ypower" */;
+			buildPhases = (
+				395041E25647EFFE93A3E67A /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ypower;
+			packageProductDependencies = (
+			);
+			productName = ypower;
+			productReference = 7D26B30F0C32165EE9BE1519 /* ypower.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DA2529A63E908D2D883CC2B5 /* ypowerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58F045D9D959A91ECD3A34FA /* Build configuration list for PBXNativeTarget "ypowerTests" */;
+			buildPhases = (
+				4691E8D9E7C9AB69DEC71E36 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				58C468B00764C76BB67CCF8B /* PBXTargetDependency */,
+			);
+			name = ypowerTests;
+			packageProductDependencies = (
+			);
+			productName = ypowerTests;
+			productReference = 1DB9FC2007CBCB526C2C5607 /* ypowerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04F8BBAF27888FE17F78B1D0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					B8B60A8E2627CD4F9387F92E = {
+						ProvisioningStyle = Automatic;
+					};
+					DA2529A63E908D2D883CC2B5 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 06C8852FAED8E22722E1A414 /* Build configuration list for PBXProject "ypower" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 96E008928A1D5F22FDB428BC;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = E715B70C0CECEBFE905817FF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B8B60A8E2627CD4F9387F92E /* ypower */,
+				DA2529A63E908D2D883CC2B5 /* ypowerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		395041E25647EFFE93A3E67A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CC3A64F3CD0EC737E145032 /* AppDelegate.swift in Sources */,
+				C3A3A70DAC05C41442C03C9B /* CandidateRow.swift in Sources */,
+				89A6926B244437EA19A8FBE4 /* ConnectionState.swift in Sources */,
+				5712D5B81B2A19BD86F58535 /* EthernetMonitor.swift in Sources */,
+				83F396600CE193EB6A86C1FA /* KnownNetworkResolver.swift in Sources */,
+				AF256A84B9EA0637FDB9EC2D /* LocationPermissionManager.swift in Sources */,
+				ACD7E94E2B5A891FC54B2BFF /* MenuBarLabel.swift in Sources */,
+				C0DE777106A8D392DB780A45 /* MenuBarViewModel.swift in Sources */,
+				5E9FE45E34907D4E53C3EA0F /* MenuContentView.swift in Sources */,
+				6ACC853C561E8190A1C82EFB /* NetworkCandidate.swift in Sources */,
+				5A9692B0285B6B3F4552E6D7 /* NetworkQualityEvaluator.swift in Sources */,
+				A60FBE11B6736FA0C10CBD72 /* NotificationManager.swift in Sources */,
+				C401EE0DE8642654D6B36640 /* PasswordPromptSheet.swift in Sources */,
+				C961383FCD543175A31C3136 /* PrimaryInterfaceResolver.swift in Sources */,
+				423C32103F8FB23BEAAB8B1C /* ShellRunner.swift in Sources */,
+				E01C0C96189A2A9ACE07E686 /* SwitchExecutor.swift in Sources */,
+				090E5FFACCBDA8AEE8CB14F6 /* WiFiMonitor.swift in Sources */,
+				660135913A3CC5D96F872EB7 /* ypowerApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4691E8D9E7C9AB69DEC71E36 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12495856FE8393B45E4A0468 /* NetworkQualityEvaluatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		58C468B00764C76BB67CCF8B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B8B60A8E2627CD4F9387F92E /* ypower */;
+			targetProxy = 6661E6F5A84F9CB333387A2E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3247969153D01659D34747FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_ENTITLEMENTS = ypower/ypower.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ypower/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dongeui.ypower;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		59D37263B9B756652823E0C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dongeui.ypowerTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ypower.app/Contents/MacOS/ypower";
+			};
+			name = Release;
+		};
+		BBF03DBC22727DB5B703285A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_ENTITLEMENTS = ypower/ypower.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ypower/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dongeui.ypower;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		BF431870CCAEF86EE7FDFC05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dongeui.ypowerTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ypower.app/Contents/MacOS/ypower";
+			};
+			name = Debug;
+		};
+		C070E1DBBD858292F616469B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		D40CCC83CDE8A3F6AE786F5D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		06C8852FAED8E22722E1A414 /* Build configuration list for PBXProject "ypower" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C070E1DBBD858292F616469B /* Debug */,
+				D40CCC83CDE8A3F6AE786F5D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		58F045D9D959A91ECD3A34FA /* Build configuration list for PBXNativeTarget "ypowerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF431870CCAEF86EE7FDFC05 /* Debug */,
+				59D37263B9B756652823E0C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		BD265BD68C74FFD5AFEB4DE7 /* Build configuration list for PBXNativeTarget "ypower" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBF03DBC22727DB5B703285A /* Debug */,
+				3247969153D01659D34747FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 04F8BBAF27888FE17F78B1D0 /* Project object */;
+}
