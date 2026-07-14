@@ -4,6 +4,11 @@ import SwiftUI
 struct MenuContentView: View {
     @Bindable var viewModel: MenuBarViewModel
 
+    private static let rowHeight: CGFloat = 38
+    private static let rowSpacing: CGFloat = 6
+    private static let visibleRows: CGFloat = 5
+    private static let listHeight: CGFloat = rowHeight * visibleRows + rowSpacing * (visibleRows - 1)
+
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(viewModel.summaryText)
@@ -57,19 +62,23 @@ struct MenuContentView: View {
                 Text("스캔된 네트워크가 없습니다")
                     .font(.caption)
                     .foregroundStyle(.secondary)
+                    .frame(height: Self.listHeight, alignment: .top)
             } else {
                 ScrollView {
-                    VStack(spacing: 6) {
+                    VStack(spacing: Self.rowSpacing) {
                         ForEach(viewModel.topCandidates) { candidate in
                             CandidateRow(
                                 candidate: candidate,
                                 isCurrent: candidate.ssid == viewModel.currentSSID,
                                 onSwitch: { viewModel.switchTo(candidate: candidate) }
                             )
+                            .frame(height: Self.rowHeight)
                         }
                     }
+                    .frame(maxWidth: .infinity, alignment: .top)
                 }
-                .frame(maxHeight: 220)
+                // Fixed to ~5 rows: shorter lists keep this height, longer ones scroll.
+                .frame(height: Self.listHeight)
             }
 
             Divider()
