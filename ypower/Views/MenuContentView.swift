@@ -85,6 +85,7 @@ struct MenuContentView: View {
                 onCancel: { viewModel.cancelPasswordPrompt() }
             )
         }
+        .onAppear { viewModel.menuDidOpen() }
     }
 }
 

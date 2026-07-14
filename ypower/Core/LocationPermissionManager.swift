@@ -8,13 +8,26 @@ import CoreLocation
 final class LocationPermissionManager: NSObject, CLLocationManagerDelegate {
     private let manager = CLLocationManager()
 
+    /// Fires whenever the OS reports a change — e.g. the user flips the toggle in
+    /// System Settings while the app is already running — so the UI doesn't have to
+    /// wait for the next scan to notice.
+    var onAuthorizationChange: (() -> Void)?
+
     var isAuthorized: Bool {
         manager.authorizationStatus == .authorizedAlways
     }
 
+    override init() {
+        super.init()
+        manager.delegate = self
+    }
+
     func requestIfNeeded() {
         guard manager.authorizationStatus == .notDetermined else { return }
-        manager.delegate = self
         manager.requestAlwaysAuthorization()
+    }
+
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        onAuthorizationChange?()
     }
 }

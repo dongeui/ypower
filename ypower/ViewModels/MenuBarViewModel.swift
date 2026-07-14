@@ -50,6 +50,9 @@ final class MenuBarViewModel {
             Task { @MainActor in self?.handleSwitchRequest(ssid: ssid, isKnown: isKnown) }
         }
         notificationManager.configure()
+        locationManager.onAuthorizationChange = { [weak self] in
+            Task { @MainActor in self?.locationAuthorized = self?.locationManager.isAuthorized ?? false }
+        }
         locationManager.requestIfNeeded()
 
         Task { await performStartupScan() }
@@ -174,6 +177,15 @@ final class MenuBarViewModel {
     // MARK: - Switching
 
     func requestScanNow() {
+        Task { await performStartupScan() }
+    }
+
+    /// Called every time the menu popover opens, so what the user sees is never more than
+    /// a click stale — background monitoring already covers the closed-menu case on its
+    /// own 5s cadence regardless of this.
+    func menuDidOpen() {
+        locationAuthorized = locationManager.isAuthorized
+        guard !isScanning else { return }
         Task { await performStartupScan() }
     }
 
