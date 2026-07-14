@@ -53,6 +53,7 @@ final class MenuBarViewModel {
     private let ethernetLossWeakPercent = 5.0
     private let pollIntervalSeconds: UInt64 = 5
     private let latencyProbeEveryNTicks = 4
+    private let scanRefreshEveryNTicks = 12 // ~60s: keeps the nearby-network list fresh on its own
     private let autoSwitchCooldown: TimeInterval = 30
 
     private init() {
@@ -130,6 +131,12 @@ final class MenuBarViewModel {
                 if canAutoSwitchNow() {
                     await attemptAutoReconnect()
                 }
+            }
+
+            // Keep the nearby-network list fresh on its own (~60s), so opening the menu can
+            // show the last record instantly instead of triggering a blocking scan each time.
+            if tick > 0 && tick % scanRefreshEveryNTicks == 0 {
+                await refreshCandidates()
             }
 
             tick += 1
@@ -216,11 +223,20 @@ final class MenuBarViewModel {
     /// Called every time the menu popover opens, so what the user sees is never more than
     /// a click stale — background monitoring already covers the closed-menu case on its
     /// own 5s cadence regardless of this.
+    /// Opening the menu shows the last recorded state instantly — no blocking rescan. The 5s
+    /// loop keeps the current-connection summary current and refreshes the nearby list ~every
+    /// 60s on its own; only permission status (cheap) is re-checked here.
     func menuDidOpen() {
         locationAuthorized = locationManager.isAuthorized
         notificationManager.refreshAuthorization()
-        guard !isScanning else { return }
-        Task { await performStartupScan() }
+    }
+
+    /// Silent background rescan of the nearby-network list (no spinner, no recommendation
+    /// notification) — used by the periodic loop refresh.
+    private func refreshCandidates() async {
+        guard wifiMonitor.isRadioOn() else { return }
+        guard let candidates = try? await wifiMonitor.scanNearby() else { return }
+        topCandidates = annotate(candidates).sorted { $0.score > $1.score }
     }
 
     func switchTo(candidate: NetworkCandidate) {
