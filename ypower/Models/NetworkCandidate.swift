@@ -6,17 +6,23 @@ struct NetworkCandidate: Identifiable, Hashable {
     let rssi: Int
     let noise: Int
     let band: WiFiBand
+    let isOpen: Bool
     var isKnown: Bool
+    /// True when the app can join this without prompting: open networks, or secured ones
+    /// whose password we've cached from a previous switch.
+    var canJoinSilently: Bool
 
     var snr: Int { rssi - noise }
 
-    init(ssid: String, rssi: Int, noise: Int, band: WiFiBand, isKnown: Bool = false) {
+    init(ssid: String, rssi: Int, noise: Int, band: WiFiBand, isOpen: Bool = false, isKnown: Bool = false, canJoinSilently: Bool = false) {
         self.id = ssid
         self.ssid = ssid
         self.rssi = rssi
         self.noise = noise
         self.band = band
+        self.isOpen = isOpen
         self.isKnown = isKnown
+        self.canJoinSilently = canJoinSilently
     }
 
     /// Higher is better. RSSI dominates; known networks and non-2.4GHz bands get a small tie-break bonus.

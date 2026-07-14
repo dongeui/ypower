@@ -11,6 +11,10 @@ final class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
     private static let knownKey = "isKnown"
 
     var onSwitchRequested: ((_ ssid: String, _ isKnown: Bool) -> Void)?
+    /// Called with the resolved grant status after the initial request and on every refresh,
+    /// so the UI can surface an in-menu hint when notifications are off (we can't tell the
+    /// user via a notification precisely when notifications are the missing permission).
+    var onAuthorizationResolved: ((Bool) -> Void)?
 
     func configure() {
         let center = UNUserNotificationCenter.current()
@@ -21,7 +25,17 @@ final class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
             UNNotificationCategory(identifier: Self.degradedCategory, actions: [switchAction], intentIdentifiers: []),
             UNNotificationCategory(identifier: Self.scanResultCategory, actions: [switchAction], intentIdentifiers: []),
         ])
-        center.requestAuthorization(options: [.alert, .sound]) { _, _ in }
+        center.requestAuthorization(options: [.alert, .sound]) { [weak self] granted, _ in
+            self?.onAuthorizationResolved?(granted)
+        }
+    }
+
+    /// Re-reads the current system setting (the user may have changed it in System Settings
+    /// after launch). Reports `true` only when notifications are actually authorized.
+    func refreshAuthorization() {
+        UNUserNotificationCenter.current().getNotificationSettings { [weak self] settings in
+            self?.onAuthorizationResolved?(settings.authorizationStatus == .authorized)
+        }
     }
 
     func postDegraded(currentSSID: String, recommended: NetworkCandidate) {

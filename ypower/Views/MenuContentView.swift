@@ -15,6 +15,12 @@ struct MenuContentView: View {
             Text(viewModel.summaryText)
                 .font(.subheadline)
 
+            if let switchStatus = viewModel.switchStatus {
+                Text(switchStatus)
+                    .font(.caption)
+                    .foregroundStyle(.blue)
+            }
+
             if !viewModel.locationAuthorized {
                 HStack {
                     Text("위치 권한이 필요해요 (Wi-Fi 이름 확인용)")
@@ -22,6 +28,17 @@ struct MenuContentView: View {
                         .foregroundStyle(.secondary)
                     Spacer()
                     Button("설정 열기") { viewModel.openLocationSettings() }
+                        .controlSize(.small)
+                }
+            }
+
+            if !viewModel.notificationsAuthorized {
+                HStack {
+                    Text("알림 권한이 꺼져 있어 추천을 못 보내요")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                    Button("설정 열기") { viewModel.openNotificationSettings() }
                         .controlSize(.small)
                 }
             }
@@ -131,21 +148,6 @@ struct MenuContentView: View {
         }
         .padding(12)
         .frame(width: 260)
-        .sheet(item: Binding(
-            get: { viewModel.pendingPasswordSSID.map(PendingSSID.init) },
-            set: { if $0 == nil { viewModel.cancelPasswordPrompt() } }
-        )) { pending in
-            PasswordPromptSheet(
-                ssid: pending.ssid,
-                onSubmit: { viewModel.submitPassword($0) },
-                onCancel: { viewModel.cancelPasswordPrompt() }
-            )
-        }
         .onAppear { viewModel.menuDidOpen() }
     }
-}
-
-private struct PendingSSID: Identifiable {
-    let ssid: String
-    var id: String { ssid }
 }

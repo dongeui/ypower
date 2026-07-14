@@ -76,7 +76,8 @@ final class WiFiMonitor: @unchecked Sendable {
                     ssid: network.ssid ?? "",
                     rssi: network.rssiValue,
                     noise: network.noiseMeasurement,
-                    band: Self.band(for: network.wlanChannel)
+                    band: Self.band(for: network.wlanChannel),
+                    isOpen: network.supportsSecurity(.none)
                 )
             }
         }.value

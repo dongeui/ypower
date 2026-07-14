@@ -15,9 +15,12 @@ final class MenuBarViewModel {
     private(set) var topCandidates: [NetworkCandidate] = []
     private(set) var isScanning: Bool = false
     private(set) var wifiRadioOff: Bool = false
-    var pendingPasswordSSID: String?
+    private(set) var switchStatus: String?
 
     private(set) var locationAuthorized: Bool = false
+    /// nil = not yet resolved; false = user denied (surface an in-menu hint since we can't
+    /// notify them via a notification when notifications are exactly what's missing).
+    private(set) var notificationsAuthorized: Bool = true
 
     /// When on, the app doesn't just notify on degradation/disconnect — it silently joins
     /// the strongest *known* network available (unknown networks still can't be auto-joined,
@@ -62,6 +65,10 @@ final class MenuBarViewModel {
         notificationManager.onSwitchRequested = { [weak self] ssid, isKnown in
             Task { @MainActor in self?.handleSwitchRequest(ssid: ssid, isKnown: isKnown) }
         }
+        notificationManager.onAuthorizationResolved = { [weak self] granted in
+            Task { @MainActor in self?.notificationsAuthorized = granted }
+        }
+        // Request every permission the features need, up front on first launch.
         notificationManager.configure()
         locationManager.onAuthorizationChange = { [weak self] in
             Task { @MainActor in self?.locationAuthorized = self?.locationManager.isAuthorized ?? false }
@@ -147,12 +154,13 @@ final class MenuBarViewModel {
         guard let candidates = try? await wifiMonitor.scanNearby() else { return }
         topCandidates = annotate(candidates).sorted { $0.score > $1.score }
 
-        // Auto mode: silently jump to a meaningfully-stronger *known* network if one exists.
+        // Auto mode: silently jump to a meaningfully-stronger joinable network if one exists
+        // (open, or one whose password we've cached — auto mode can't prompt).
         if canAutoSwitchNow(),
-           let betterKnown = topCandidates.first(where: {
-               $0.isKnown && $0.ssid != status.ssid && $0.rssi > status.rssi + wifiRelativeMarginDb
+           let better = topCandidates.first(where: {
+               $0.canJoinSilently && $0.ssid != status.ssid && $0.rssi > status.rssi + wifiRelativeMarginDb
            }) {
-            autoSwitch(to: betterKnown)
+            autoSwitch(to: better)
             return
         }
 
@@ -210,26 +218,38 @@ final class MenuBarViewModel {
     /// own 5s cadence regardless of this.
     func menuDidOpen() {
         locationAuthorized = locationManager.isAuthorized
+        notificationManager.refreshAuthorization()
         guard !isScanning else { return }
         Task { await performStartupScan() }
     }
 
     func switchTo(candidate: NetworkCandidate) {
-        handleSwitchRequest(ssid: candidate.ssid, isKnown: candidate.isKnown)
+        // Open or password-cached → join straight away; otherwise prompt for the password.
+        if candidate.isOpen {
+            performSwitch(ssid: candidate.ssid, password: nil)
+        } else if let cached = WiFiCredentialStore.password(for: candidate.ssid) {
+            performSwitch(ssid: candidate.ssid, password: cached)
+        } else {
+            promptPasswordAndSwitch(ssid: candidate.ssid)
+        }
     }
 
-    func submitPassword(_ password: String) {
-        guard let ssid = pendingPasswordSSID else { return }
-        pendingPasswordSSID = nil
-        performSwitch(ssid: ssid, isKnown: false, password: password)
-    }
-
-    func cancelPasswordPrompt() {
-        pendingPasswordSSID = nil
+    /// Shows the AppKit password dialog and, if the user enters one, performs the switch.
+    private func promptPasswordAndSwitch(ssid: String) {
+        guard let password = PasswordPrompter.prompt(ssid: ssid) else {
+            switchStatus = nil
+            return
+        }
+        performSwitch(ssid: ssid, password: password)
     }
 
     func openLocationSettings() {
         guard let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_LocationServices") else { return }
+        NSWorkspace.shared.open(url)
+    }
+
+    func openNotificationSettings() {
+        guard let url = URL(string: "x-apple.systempreferences:com.apple.preference.notifications") else { return }
         NSWorkspace.shared.open(url)
     }
 
@@ -299,21 +319,23 @@ final class MenuBarViewModel {
         return true
     }
 
-    /// Called from the disconnected branch: pick the strongest known network in range and join it.
+    /// Called from the disconnected branch: pick the strongest silently-joinable network and join it.
     private func attemptAutoReconnect() async {
         guard wifiMonitor.isRadioOn() else { return }
         guard let candidates = try? await wifiMonitor.scanNearby() else { return }
         topCandidates = annotate(candidates).sorted { $0.score > $1.score }
-        guard let bestKnown = topCandidates.first(where: { $0.isKnown }) else { return }
-        autoSwitch(to: bestKnown)
+        guard let best = topCandidates.first(where: { $0.canJoinSilently }) else { return }
+        autoSwitch(to: best)
     }
 
     private func autoSwitch(to candidate: NetworkCandidate, now: Date = Date()) {
         guard let interfaceName = wifiMonitor.interfaceName else { return }
         lastAutoSwitchAt = now
+        // Auto mode never prompts, so only open networks or password-cached ones get here.
+        let password = candidate.isOpen ? nil : WiFiCredentialStore.password(for: candidate.ssid)
         Task {
             let result = await switchExecutor.switchTo(
-                ssid: candidate.ssid, isKnown: true, password: nil, interfaceName: interfaceName
+                ssid: candidate.ssid, password: password, interfaceName: interfaceName
             )
             if result == .joined {
                 evaluator.reset()
@@ -323,25 +345,42 @@ final class MenuBarViewModel {
     }
 
     private func handleSwitchRequest(ssid: String, isKnown: Bool) {
-        if isKnown {
-            performSwitch(ssid: ssid, isKnown: true, password: nil)
+        // From a notification action: use a cached password if we have one, else prompt.
+        if let cached = WiFiCredentialStore.password(for: ssid) {
+            performSwitch(ssid: ssid, password: cached)
         } else {
-            pendingPasswordSSID = ssid
+            promptPasswordAndSwitch(ssid: ssid)
         }
     }
 
-    private func performSwitch(ssid: String, isKnown: Bool, password: String?) {
+    private func performSwitch(ssid: String, password: String?) {
         guard let interfaceName = wifiMonitor.interfaceName else { return }
+        switchStatus = "\(ssid)로 전환 중…"
         Task {
             let result = await switchExecutor.switchTo(
-                ssid: ssid, isKnown: isKnown, password: password, interfaceName: interfaceName
+                ssid: ssid, password: password, interfaceName: interfaceName
             )
-            if result == .needsPassword {
-                pendingPasswordSSID = ssid
-            } else if result == .joined {
+            switch result {
+            case .joined:
+                if let password { WiFiCredentialStore.save(password: password, for: ssid) }
+                switchStatus = "\(ssid) 연결됨"
                 evaluator.reset()
                 await performStartupScan()
+                clearSwitchStatusSoon()
+            case .needsPassword:
+                switchStatus = nil
+                promptPasswordAndSwitch(ssid: ssid)
+            case .failed:
+                switchStatus = "전환 실패 — 비밀번호를 확인해 주세요"
+                clearSwitchStatusSoon()
             }
+        }
+    }
+
+    private func clearSwitchStatusSoon() {
+        Task {
+            try? await Task.sleep(for: .seconds(4))
+            switchStatus = nil
         }
     }
 
@@ -352,6 +391,8 @@ final class MenuBarViewModel {
         return candidates.map { candidate in
             var c = candidate
             c.isKnown = knownResolver.isKnown(ssid: candidate.ssid, interfaceName: interfaceName)
+            // Silent join only works for open networks or ones we've cached a password for.
+            c.canJoinSilently = candidate.isOpen || WiFiCredentialStore.has(candidate.ssid)
             return c
         }
     }

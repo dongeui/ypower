@@ -10,6 +10,7 @@
 		090E5FFACCBDA8AEE8CB14F6 /* WiFiMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A318C85304F5D3B45207C2D /* WiFiMonitor.swift */; };
 		12495856FE8393B45E4A0468 /* NetworkQualityEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B29BF4157DC3FC0D3A32B06 /* NetworkQualityEvaluatorTests.swift */; };
 		423C32103F8FB23BEAAB8B1C /* ShellRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29BAAFF665FFA2D81D51E75 /* ShellRunner.swift */; };
+		455CC80A61AB9D2E5B1520B1 /* PasswordPrompter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB30E4F85687FAA1E729972 /* PasswordPrompter.swift */; };
 		5712D5B81B2A19BD86F58535 /* EthernetMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2F409961A201887753ADBC /* EthernetMonitor.swift */; };
 		5A9692B0285B6B3F4552E6D7 /* NetworkQualityEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496A89EA0186B4B1075C1529 /* NetworkQualityEvaluator.swift */; };
 		5CC3A64F3CD0EC737E145032 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CD95166282D46F607E1573 /* AppDelegate.swift */; };
@@ -22,9 +23,9 @@
 		A60FBE11B6736FA0C10CBD72 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED3A93CBF9773AB05D22E2 /* NotificationManager.swift */; };
 		ACD7E94E2B5A891FC54B2BFF /* MenuBarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C789AC4E5C1A605A93FD1EF /* MenuBarLabel.swift */; };
 		AF256A84B9EA0637FDB9EC2D /* LocationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AC19896104A88554675F55 /* LocationPermissionManager.swift */; };
+		BEA50D5F3809BA2B04E6B0BB /* WiFiCredentialStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B677CF31D001095E18B527 /* WiFiCredentialStore.swift */; };
 		C0DE777106A8D392DB780A45 /* MenuBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29ABBBB720F30478394B0B53 /* MenuBarViewModel.swift */; };
 		C3A3A70DAC05C41442C03C9B /* CandidateRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01F72B4BD99A23FC5602DBF /* CandidateRow.swift */; };
-		C401EE0DE8642654D6B36640 /* PasswordPromptSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330BF44093B25613572D5FEB /* PasswordPromptSheet.swift */; };
 		C961383FCD543175A31C3136 /* PrimaryInterfaceResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1339473FC292286250427D28 /* PrimaryInterfaceResolver.swift */; };
 		CEDCD3835C8914C39AD5D72A /* CrashReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DA18A8B11A233D0121ECDE /* CrashReporting.swift */; };
 		DAE7A841DAF7332B717B37A0 /* DiagnosticsExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127A374872F422A5F4703EC5 /* DiagnosticsExporter.swift */; };
@@ -49,12 +50,13 @@
 		28B9D35C9D91C4EAB8CA4807 /* NetworkCandidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCandidate.swift; sourceTree = "<group>"; };
 		29ABBBB720F30478394B0B53 /* MenuBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarViewModel.swift; sourceTree = "<group>"; };
 		2ECC3FFDC78B1F956ACA008B /* SwitchExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchExecutor.swift; sourceTree = "<group>"; };
-		330BF44093B25613572D5FEB /* PasswordPromptSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordPromptSheet.swift; sourceTree = "<group>"; };
 		36CD95166282D46F607E1573 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		496A89EA0186B4B1075C1529 /* NetworkQualityEvaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkQualityEvaluator.swift; sourceTree = "<group>"; };
 		5C789AC4E5C1A605A93FD1EF /* MenuBarLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarLabel.swift; sourceTree = "<group>"; };
 		6058D000F87BFA1187438ABB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6379BB4659C1D8C0A9263408 /* KnownNetworkResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnownNetworkResolver.swift; sourceTree = "<group>"; };
+		6CB30E4F85687FAA1E729972 /* PasswordPrompter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordPrompter.swift; sourceTree = "<group>"; };
+		76B677CF31D001095E18B527 /* WiFiCredentialStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiCredentialStore.swift; sourceTree = "<group>"; };
 		7A318C85304F5D3B45207C2D /* WiFiMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiMonitor.swift; sourceTree = "<group>"; };
 		7D26B30F0C32165EE9BE1519 /* ypower.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ypower.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F2F409961A201887753ADBC /* EthernetMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthernetMonitor.swift; sourceTree = "<group>"; };
@@ -96,7 +98,7 @@
 				B01F72B4BD99A23FC5602DBF /* CandidateRow.swift */,
 				5C789AC4E5C1A605A93FD1EF /* MenuBarLabel.swift */,
 				DE12AE6C5A76761CE750D182 /* MenuContentView.swift */,
-				330BF44093B25613572D5FEB /* PasswordPromptSheet.swift */,
+				6CB30E4F85687FAA1E729972 /* PasswordPrompter.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -138,6 +140,7 @@
 				80DA18A8B11A233D0121ECDE /* CrashReporting.swift */,
 				127A374872F422A5F4703EC5 /* DiagnosticsExporter.swift */,
 				A29BAAFF665FFA2D81D51E75 /* ShellRunner.swift */,
+				76B677CF31D001095E18B527 /* WiFiCredentialStore.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -275,10 +278,11 @@
 				6ACC853C561E8190A1C82EFB /* NetworkCandidate.swift in Sources */,
 				5A9692B0285B6B3F4552E6D7 /* NetworkQualityEvaluator.swift in Sources */,
 				A60FBE11B6736FA0C10CBD72 /* NotificationManager.swift in Sources */,
-				C401EE0DE8642654D6B36640 /* PasswordPromptSheet.swift in Sources */,
+				455CC80A61AB9D2E5B1520B1 /* PasswordPrompter.swift in Sources */,
 				C961383FCD543175A31C3136 /* PrimaryInterfaceResolver.swift in Sources */,
 				423C32103F8FB23BEAAB8B1C /* ShellRunner.swift in Sources */,
 				E01C0C96189A2A9ACE07E686 /* SwitchExecutor.swift in Sources */,
+				BEA50D5F3809BA2B04E6B0BB /* WiFiCredentialStore.swift in Sources */,
 				090E5FFACCBDA8AEE8CB14F6 /* WiFiMonitor.swift in Sources */,
 				660135913A3CC5D96F872EB7 /* ypowerApp.swift in Sources */,
 			);

@@ -6,10 +6,14 @@ enum SwitchResult: Equatable {
     case failed
 }
 
-/// Performs the actual join. Known networks (per KnownNetworkResolver) are attempted
-/// silently with no password; everything else stops at `.needsPassword` and never
-/// guesses/bypasses — matches the non-negotiable "one more confirmation" requirement
-/// for networks this Mac hasn't joined before.
+/// Performs the actual join.
+///
+/// A non-privileged app can't have macOS auto-pull a saved Wi-Fi password from the system
+/// keychain — `associate(password:nil)` and `networksetup -setairportnetwork <ssid>` both
+/// fail with -3900 for a secured network. So the only reliable join is: open network (nil
+/// password is fine) or a secured network with the password supplied explicitly (from our
+/// own cache, or freshly entered). When no password is available and the join fails, we
+/// return `.needsPassword` so the caller can prompt — never guessing or bypassing.
 final class SwitchExecutor: @unchecked Sendable {
     private let wifiMonitor: WiFiMonitor
 
@@ -17,23 +21,25 @@ final class SwitchExecutor: @unchecked Sendable {
         self.wifiMonitor = wifiMonitor
     }
 
-    func switchTo(ssid: String, isKnown: Bool, password: String?, interfaceName: String) async -> SwitchResult {
-        if !isKnown && password == nil {
-            return .needsPassword
-        }
-
+    func switchTo(ssid: String, password: String?, interfaceName: String) async -> SwitchResult {
+        var joinFailed = false
         do {
             try wifiMonitor.associate(ssid: ssid, password: password)
         } catch {
-            // In-process CoreWLAN association can fail on transient airportd XPC hiccups;
-            // fall back to the same mechanism System Settings' Wi-Fi menu uses.
+            // Fall back to the same mechanism System Settings' Wi-Fi menu uses.
             var args = ["-setairportnetwork", interfaceName, ssid]
             if let password { args.append(password) }
-            _ = ShellRunner.run("/usr/sbin/networksetup", args)
+            let output = ShellRunner.run("/usr/sbin/networksetup", args).lowercased()
+            joinFailed = output.contains("failed") || output.contains("error")
         }
 
-        try? await Task.sleep(for: .seconds(3))
+        // If the CLI already reported failure, don't wait — resolve immediately.
+        if joinFailed {
+            return password == nil ? .needsPassword : .failed
+        }
 
+        // Otherwise give the association a moment, then verify against the live interface.
+        try? await Task.sleep(for: .seconds(2))
         if wifiMonitor.currentStatus()?.ssid == ssid {
             return .joined
         }
