@@ -58,13 +58,18 @@ struct MenuContentView: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
             } else {
-                ForEach(viewModel.topCandidates.prefix(5)) { candidate in
-                    CandidateRow(
-                        candidate: candidate,
-                        isCurrent: candidate.ssid == viewModel.currentSSID,
-                        onSwitch: { viewModel.switchTo(candidate: candidate) }
-                    )
+                ScrollView {
+                    VStack(spacing: 6) {
+                        ForEach(viewModel.topCandidates) { candidate in
+                            CandidateRow(
+                                candidate: candidate,
+                                isCurrent: candidate.ssid == viewModel.currentSSID,
+                                onSwitch: { viewModel.switchTo(candidate: candidate) }
+                            )
+                        }
+                    }
                 }
+                .frame(maxHeight: 220)
             }
 
             Divider()
