@@ -19,6 +19,15 @@ final class MenuBarViewModel {
 
     private(set) var locationAuthorized: Bool = false
 
+    /// When on, the app doesn't just notify on degradation/disconnect — it silently joins
+    /// the strongest *known* network available (unknown networks still can't be auto-joined,
+    /// they need a password). Persisted so it survives relaunches. Trades brief drops during
+    /// a switch for staying online, per the user's opt-in.
+    var autoSwitchEnabled: Bool {
+        didSet { UserDefaults.standard.set(autoSwitchEnabled, forKey: Self.autoSwitchKey) }
+    }
+    private static let autoSwitchKey = "autoSwitchEnabled"
+
     @ObservationIgnored private let wifiMonitor = WiFiMonitor()
     @ObservationIgnored private let ethernetMonitor = EthernetMonitor()
     @ObservationIgnored private let knownResolver = KnownNetworkResolver()
@@ -32,6 +41,7 @@ final class MenuBarViewModel {
     @ObservationIgnored private var lastGoodEthernetSpeed: Int?
     @ObservationIgnored private var lastLatencySample: LatencySample?
     @ObservationIgnored private var tick = 0
+    @ObservationIgnored private var lastAutoSwitchAt: Date?
 
     // Thresholds — no settings UI by design; these are the only tunables.
     private let wifiAbsoluteWeakRSSI = -75
@@ -40,8 +50,11 @@ final class MenuBarViewModel {
     private let ethernetLossWeakPercent = 5.0
     private let pollIntervalSeconds: UInt64 = 5
     private let latencyProbeEveryNTicks = 4
+    private let autoSwitchCooldown: TimeInterval = 30
 
-    private init() {}
+    private init() {
+        autoSwitchEnabled = UserDefaults.standard.bool(forKey: Self.autoSwitchKey)
+    }
 
     func start() {
         guard monitorTask == nil else { return }
@@ -107,6 +120,9 @@ final class MenuBarViewModel {
             case .none:
                 currentSSID = nil
                 summaryText = "연결된 네트워크가 없습니다"
+                if canAutoSwitchNow() {
+                    await attemptAutoReconnect()
+                }
             }
 
             tick += 1
@@ -130,6 +146,15 @@ final class MenuBarViewModel {
 
         guard let candidates = try? await wifiMonitor.scanNearby() else { return }
         topCandidates = annotate(candidates).sorted { $0.score > $1.score }
+
+        // Auto mode: silently jump to a meaningfully-stronger *known* network if one exists.
+        if canAutoSwitchNow(),
+           let betterKnown = topCandidates.first(where: {
+               $0.isKnown && $0.ssid != status.ssid && $0.rssi > status.rssi + wifiRelativeMarginDb
+           }) {
+            autoSwitch(to: betterKnown)
+            return
+        }
 
         guard let best = topCandidates.first(where: { $0.ssid != status.ssid }),
               best.rssi > status.rssi + wifiRelativeMarginDb,
@@ -215,6 +240,37 @@ final class MenuBarViewModel {
         wifiRadioOff = !wifiMonitor.isRadioOn()
         if !wifiRadioOff {
             Task { await performStartupScan() }
+        }
+    }
+
+    // MARK: - Auto switch
+
+    private func canAutoSwitchNow(_ now: Date = Date()) -> Bool {
+        guard autoSwitchEnabled else { return false }
+        if let last = lastAutoSwitchAt, now.timeIntervalSince(last) < autoSwitchCooldown { return false }
+        return true
+    }
+
+    /// Called from the disconnected branch: pick the strongest known network in range and join it.
+    private func attemptAutoReconnect() async {
+        guard wifiMonitor.isRadioOn() else { return }
+        guard let candidates = try? await wifiMonitor.scanNearby() else { return }
+        topCandidates = annotate(candidates).sorted { $0.score > $1.score }
+        guard let bestKnown = topCandidates.first(where: { $0.isKnown }) else { return }
+        autoSwitch(to: bestKnown)
+    }
+
+    private func autoSwitch(to candidate: NetworkCandidate, now: Date = Date()) {
+        guard let interfaceName = wifiMonitor.interfaceName else { return }
+        lastAutoSwitchAt = now
+        Task {
+            let result = await switchExecutor.switchTo(
+                ssid: candidate.ssid, isKnown: true, password: nil, interfaceName: interfaceName
+            )
+            if result == .joined {
+                evaluator.reset()
+                await performStartupScan()
+            }
         }
     }
 

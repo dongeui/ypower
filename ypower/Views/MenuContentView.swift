@@ -38,6 +38,18 @@ struct MenuContentView: View {
 
             Divider()
 
+            VStack(alignment: .leading, spacing: 2) {
+                Toggle("자동 전환", isOn: $viewModel.autoSwitchEnabled)
+                    .toggleStyle(.switch)
+                    .controlSize(.mini)
+                    .font(.subheadline)
+                Text("등록된 네트워크 중 가장 강한 곳으로 자동 연결 (전환 시 잠깐 끊길 수 있음)")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+
+            Divider()
+
             HStack {
                 Text("주변 네트워크")
                     .font(.caption)
