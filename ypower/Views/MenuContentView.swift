@@ -3,6 +3,7 @@ import SwiftUI
 
 struct MenuContentView: View {
     @Bindable var viewModel: MenuBarViewModel
+    @State private var crashReportingEnabled = CrashReporting.isEnabled
 
     private static let rowHeight: CGFloat = 38
     private static let rowSpacing: CGFloat = 6
@@ -46,6 +47,27 @@ struct MenuContentView: View {
                 Text("등록된 네트워크 중 가장 강한 곳으로 자동 연결 (전환 시 잠깐 끊길 수 있음)")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
+            }
+
+            // opt-in 크래시 리포팅: DSN이 빌드에 주입된 경우에만 토글을 노출한다.
+            if CrashReporting.isAvailable {
+                VStack(alignment: .leading, spacing: 2) {
+                    Toggle("익명 오류 보고", isOn: $crashReportingEnabled)
+                        .toggleStyle(.switch)
+                        .controlSize(.mini)
+                        .font(.subheadline)
+                        .onChange(of: crashReportingEnabled) { _, enabled in
+                            CrashReporting.setEnabled(enabled)
+                            if enabled {
+                                CrashReporting.startIfConsented()
+                            } else {
+                                CrashReporting.stop()
+                            }
+                        }
+                    Text("앱이 비정상 종료될 때만 익명 크래시 리포트를 보냅니다")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
             }
 
             Divider()

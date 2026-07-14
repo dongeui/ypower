@@ -18,6 +18,7 @@
 		6ACC853C561E8190A1C82EFB /* NetworkCandidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B9D35C9D91C4EAB8CA4807 /* NetworkCandidate.swift */; };
 		83F396600CE193EB6A86C1FA /* KnownNetworkResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379BB4659C1D8C0A9263408 /* KnownNetworkResolver.swift */; };
 		89A6926B244437EA19A8FBE4 /* ConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE063EB5059BEE9FE4DF61C0 /* ConnectionState.swift */; };
+		A1CA97C0A5DF9587B5E09752 /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = A615595B563AAB67841EF514 /* Sentry */; };
 		A60FBE11B6736FA0C10CBD72 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED3A93CBF9773AB05D22E2 /* NotificationManager.swift */; };
 		ACD7E94E2B5A891FC54B2BFF /* MenuBarLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C789AC4E5C1A605A93FD1EF /* MenuBarLabel.swift */; };
 		AF256A84B9EA0637FDB9EC2D /* LocationPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5AC19896104A88554675F55 /* LocationPermissionManager.swift */; };
@@ -25,6 +26,7 @@
 		C3A3A70DAC05C41442C03C9B /* CandidateRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01F72B4BD99A23FC5602DBF /* CandidateRow.swift */; };
 		C401EE0DE8642654D6B36640 /* PasswordPromptSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330BF44093B25613572D5FEB /* PasswordPromptSheet.swift */; };
 		C961383FCD543175A31C3136 /* PrimaryInterfaceResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1339473FC292286250427D28 /* PrimaryInterfaceResolver.swift */; };
+		CEDCD3835C8914C39AD5D72A /* CrashReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DA18A8B11A233D0121ECDE /* CrashReporting.swift */; };
 		E01C0C96189A2A9ACE07E686 /* SwitchExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC3FFDC78B1F956ACA008B /* SwitchExecutor.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +56,7 @@
 		7A318C85304F5D3B45207C2D /* WiFiMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiMonitor.swift; sourceTree = "<group>"; };
 		7D26B30F0C32165EE9BE1519 /* ypower.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ypower.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F2F409961A201887753ADBC /* EthernetMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthernetMonitor.swift; sourceTree = "<group>"; };
+		80DA18A8B11A233D0121ECDE /* CrashReporting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashReporting.swift; sourceTree = "<group>"; };
 		9B29BF4157DC3FC0D3A32B06 /* NetworkQualityEvaluatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkQualityEvaluatorTests.swift; sourceTree = "<group>"; };
 		A29BAAFF665FFA2D81D51E75 /* ShellRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShellRunner.swift; sourceTree = "<group>"; };
 		B01F72B4BD99A23FC5602DBF /* CandidateRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateRow.swift; sourceTree = "<group>"; };
@@ -63,6 +66,17 @@
 		DE12AE6C5A76761CE750D182 /* MenuContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuContentView.swift; sourceTree = "<group>"; };
 		E5AC19896104A88554675F55 /* LocationPermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5018BCAD82EB60525DED67C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1CA97C0A5DF9587B5E09752 /* Sentry in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		20C2D6B3ABFCFA6EBCBF35EE /* Models */ = {
@@ -119,6 +133,7 @@
 		8F1378840B64DB21A8850446 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				80DA18A8B11A233D0121ECDE /* CrashReporting.swift */,
 				A29BAAFF665FFA2D81D51E75 /* ShellRunner.swift */,
 			);
 			path = Support;
@@ -166,6 +181,7 @@
 			buildConfigurationList = BD265BD68C74FFD5AFEB4DE7 /* Build configuration list for PBXNativeTarget "ypower" */;
 			buildPhases = (
 				395041E25647EFFE93A3E67A /* Sources */,
+				5018BCAD82EB60525DED67C5 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -173,6 +189,7 @@
 			);
 			name = ypower;
 			packageProductDependencies = (
+				A615595B563AAB67841EF514 /* Sentry */,
 			);
 			productName = ypower;
 			productReference = 7D26B30F0C32165EE9BE1519 /* ypower.app */;
@@ -222,6 +239,9 @@
 			);
 			mainGroup = 96E008928A1D5F22FDB428BC;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				453419C3C51B58B491C3AF39 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E715B70C0CECEBFE905817FF /* Products */;
 			projectDirPath = "";
@@ -241,6 +261,7 @@
 				5CC3A64F3CD0EC737E145032 /* AppDelegate.swift in Sources */,
 				C3A3A70DAC05C41442C03C9B /* CandidateRow.swift in Sources */,
 				89A6926B244437EA19A8FBE4 /* ConnectionState.swift in Sources */,
+				CEDCD3835C8914C39AD5D72A /* CrashReporting.swift in Sources */,
 				5712D5B81B2A19BD86F58535 /* EthernetMonitor.swift in Sources */,
 				83F396600CE193EB6A86C1FA /* KnownNetworkResolver.swift in Sources */,
 				AF256A84B9EA0637FDB9EC2D /* LocationPermissionManager.swift in Sources */,
@@ -416,6 +437,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 6.0;
+				YPOWER_SENTRY_DSN = "";
 			};
 			name = Debug;
 		};
@@ -474,6 +496,7 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 6.0;
+				YPOWER_SENTRY_DSN = "";
 			};
 			name = Release;
 		};
@@ -508,6 +531,25 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		453419C3C51B58B491C3AF39 /* XCRemoteSwiftPackageReference "sentry-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/getsentry/sentry-cocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A615595B563AAB67841EF514 /* Sentry */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 453419C3C51B58B491C3AF39 /* XCRemoteSwiftPackageReference "sentry-cocoa" */;
+			productName = Sentry;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 04F8BBAF27888FE17F78B1D0 /* Project object */;
 }

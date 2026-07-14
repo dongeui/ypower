@@ -30,5 +30,7 @@
 	<string></string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>YpowerSentryDSN</key>
+	<string>$(YPOWER_SENTRY_DSN)</string>
 </dict>
 </plist>
