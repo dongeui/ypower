@@ -27,6 +27,7 @@
 		C401EE0DE8642654D6B36640 /* PasswordPromptSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330BF44093B25613572D5FEB /* PasswordPromptSheet.swift */; };
 		C961383FCD543175A31C3136 /* PrimaryInterfaceResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1339473FC292286250427D28 /* PrimaryInterfaceResolver.swift */; };
 		CEDCD3835C8914C39AD5D72A /* CrashReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DA18A8B11A233D0121ECDE /* CrashReporting.swift */; };
+		DAE7A841DAF7332B717B37A0 /* DiagnosticsExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127A374872F422A5F4703EC5 /* DiagnosticsExporter.swift */; };
 		E01C0C96189A2A9ACE07E686 /* SwitchExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECC3FFDC78B1F956ACA008B /* SwitchExecutor.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		127A374872F422A5F4703EC5 /* DiagnosticsExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosticsExporter.swift; sourceTree = "<group>"; };
 		127C39173B7F2D8A24A78B16 /* ypower.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ypower.entitlements; sourceTree = "<group>"; };
 		1339473FC292286250427D28 /* PrimaryInterfaceResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryInterfaceResolver.swift; sourceTree = "<group>"; };
 		1DB9FC2007CBCB526C2C5607 /* ypowerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ypowerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				80DA18A8B11A233D0121ECDE /* CrashReporting.swift */,
+				127A374872F422A5F4703EC5 /* DiagnosticsExporter.swift */,
 				A29BAAFF665FFA2D81D51E75 /* ShellRunner.swift */,
 			);
 			path = Support;
@@ -262,6 +265,7 @@
 				C3A3A70DAC05C41442C03C9B /* CandidateRow.swift in Sources */,
 				89A6926B244437EA19A8FBE4 /* ConnectionState.swift in Sources */,
 				CEDCD3835C8914C39AD5D72A /* CrashReporting.swift in Sources */,
+				DAE7A841DAF7332B717B37A0 /* DiagnosticsExporter.swift in Sources */,
 				5712D5B81B2A19BD86F58535 /* EthernetMonitor.swift in Sources */,
 				83F396600CE193EB6A86C1FA /* KnownNetworkResolver.swift in Sources */,
 				AF256A84B9EA0637FDB9EC2D /* LocationPermissionManager.swift in Sources */,

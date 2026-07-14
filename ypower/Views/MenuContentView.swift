@@ -117,8 +117,16 @@ struct MenuContentView: View {
 
             Divider()
 
-            Button("종료") {
-                NSApplication.shared.terminate(nil)
+            HStack {
+                // 지원 요청 시 첨부할 로컬 진단 번들(비밀번호·실명 SSID 미포함)을
+                // 만들어 Finder로 보여준다 — 완료 피드백은 Finder 표시 그 자체.
+                Button("진단 정보 내보내기") {
+                    viewModel.exportDiagnostics()
+                }
+                Spacer()
+                Button("종료") {
+                    NSApplication.shared.terminate(nil)
+                }
             }
         }
         .padding(12)

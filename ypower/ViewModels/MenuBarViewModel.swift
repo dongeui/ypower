@@ -243,6 +243,54 @@ final class MenuBarViewModel {
         }
     }
 
+    // MARK: - Diagnostics
+
+    /// 진단 번들을 만들어 Finder로 보여준다(피드백은 Finder 표시 그 자체).
+    /// 스냅샷은 MainActor에서 뜨고, 파일 I/O·os.log 수집은 백그라운드에서 한다.
+    /// 프라이버시 규칙(SSID 마스킹, 비밀번호 절대 미포함)은 DiagnosticsExporter 참고.
+    func exportDiagnostics() {
+        let snapshot = DiagnosticsSnapshot(
+            connectionState: String(describing: connectionState),
+            currentMedium: String(describing: currentMedium),
+            currentSSID: currentSSID,
+            autoSwitchEnabled: autoSwitchEnabled,
+            locationAuthorized: locationAuthorized,
+            wifiRadioOff: wifiRadioOff,
+            isScanning: isScanning,
+            candidates: topCandidates.map {
+                DiagnosticsSnapshot.Candidate(
+                    ssid: $0.ssid,
+                    rssi: $0.rssi,
+                    noise: $0.noise,
+                    band: Self.bandLabel($0.band),
+                    isKnown: $0.isKnown,
+                    score: $0.score
+                )
+            },
+            crashReportingAvailable: CrashReporting.isAvailable,
+            crashReportingEnabled: CrashReporting.isEnabled
+        )
+        Task.detached(priority: .userInitiated) {
+            do {
+                let bundleURL = try DiagnosticsExporter.export(snapshot: snapshot)
+                await MainActor.run {
+                    NSWorkspace.shared.activateFileViewerSelecting([bundleURL])
+                }
+            } catch {
+                NSLog("exportDiagnostics failed: \(error)")
+            }
+        }
+    }
+
+    private static func bandLabel(_ band: WiFiBand) -> String {
+        switch band {
+        case .ghz2_4: return "2.4GHz"
+        case .ghz5: return "5GHz"
+        case .ghz6: return "6GHz"
+        case .unknown: return "unknown"
+        }
+    }
+
     // MARK: - Auto switch
 
     private func canAutoSwitchNow(_ now: Date = Date()) -> Bool {
